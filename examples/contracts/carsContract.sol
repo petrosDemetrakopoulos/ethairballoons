@@ -1,65 +1,65 @@
 pragma solidity ^0.6.1;
 pragma experimental ABIEncoderV2;
 contract carsContract {
-	uint public dataId;
+	bytes32 public dataId;
+	uint public numberOfRecords = 0;
+	bytes32[] public recordsList;
 
 	event dataAdded(string dat);
 
-	constructor() public{
-		dataId = 0;
-	}
-
-	struct Car{
+	struct Car {
 		string payload;
-		uint timestamp;
+		uint listPointer;
 	}
 
 
-	mapping(uint => Car) public facts;
+	mapping(bytes32 => Car) public facts;
 
-	function addRecord(string memory payload) public returns (string memory, uint ID){
-		facts[dataId].payload= payload;
-		facts[dataId].timestamp = now;
- 		dataId += 1;
-		return (facts[dataId-1].payload,dataId -1);
+	function isRecord(bytes32 recordAddress) public view returns (bool isRec) {
+		if(recordsList.length == 0) return false;
+		return (recordsList[facts[recordAddress].listPointer] == recordAddress);
 	}
 
-	function getRecord(uint id) public view returns (string memory payload, uint timestamp){
-		return (facts[id].payload, facts[id].timestamp);
+	function getRecordCount() public view returns (uint recCount){
+		return recordsList.length;
 	}
 
-	function getAllRecords(uint id) public view returns (string[] memory payloads, uint[] memory timestamps){
-		string[] memory payloadss = new string[](id);
-		uint[] memory timestampss = new uint[](id);
-		for(uint i =0; i < id; i++){
-			Car storage fact = facts[i];
+	function addRecord(string memory payload, bytes32 ID) public returns (bool success) {
+	if(isRecord(ID)) revert('record exists');
+		facts[ID].payload = payload;
+		recordsList.push(ID);
+		facts[ID].listPointer = recordsList.length - 1;
+		numberOfRecords++;
+		return true;
+	}
+
+	function getRecord(bytes32 id) public view returns (string memory payload){
+		return (facts[id].payload);
+	}
+
+	function updateRecord(bytes32 id, string memory payload) public returns (bool success){
+		if(!isRecord(id)) revert('it is not record');
+		facts[id].payload = payload;
+		return true;
+	}
+
+	function getAllRecords() public view returns (string[] memory payloads) {
+		string[] memory payloadss = new string[](numberOfRecords);
+		for (uint i = 0; i < numberOfRecords; i++) {
+			Car storage fact = facts[recordsList[i]];
 			payloadss[i] = fact.payload;
-			timestampss[i] = fact.timestamp;
 		}
-		return (payloadss,timestampss);
+		return (payloadss);
 	}
 
-	function getRecordsFromTo(uint from, uint to) public view returns (string[] memory payloadsFromTo, uint[] memory timestampsFromTo){
-		string[] memory payloadss = new string[](to - from);
-		uint[] memory timestampss = new uint[](to - from);
-		uint j = 0;
-		for(uint i = from; i < to; i++){
-			Car storage fact = facts[j];
-			payloadss[j] = fact.payload;
-			timestampss[j] = fact.timestamp;
-			j++;
-		}
-		return (payloadss,timestampss);
-	}
-
-	function addRecords(string[] memory payloadsss) public returns (string memory, uint IDMany){
-		for(uint i =0; i < payloadsss.length; i++){
-			facts[dataId].payload= payloadsss[i];
-			facts[dataId].timestamp = now;
-			dataId += 1;
-		}
-		 emit dataAdded(facts[dataId-1].payload);
-		return (facts[dataId-1].payload,dataId -1);
-	}
+function deleteRecord(bytes32 id) public returns (bool success) {
+    if(!isRecord(id)) revert('it is not record');
+    uint rowToDelete = facts[id].listPointer;
+    bytes32 keyToMove = recordsList[recordsList.length-1];
+    recordsList[rowToDelete] = keyToMove;
+    facts[keyToMove].listPointer = rowToDelete;
+    recordsList.pop();
+    return true;
+  }
 
 }

@@ -1,5 +1,5 @@
 const http = require('http');
-const path = require("path");
+const path = require('path');
 const hostname = '127.0.0.1';
 const port = 3000;
 const ethAirBaloons = require('../lib');
@@ -23,7 +23,7 @@ server.listen(port, hostname, () => {
 	}
 	]
 });
-   Car.deploy(function(contractInstance, error){
+   Car.deploy(function(contractInstance, error) {
    	if(!error) {
    		console.log('deployed on address: ' + contractInstance.options.address);
    	} else {
