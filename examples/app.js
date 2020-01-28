@@ -1,19 +1,19 @@
-const http = require('http');
-const path = require('path');
-const hostname = '127.0.0.1';
-const port = 3000;
-const ethAirBaloons = require('../lib');
-const server = http.createServer((req, res) => {
+var http = require('http');
+var path = require('path');
+var hostname = '127.0.0.1';
+var port = 3000;
+var ethAirBalloons = require('../lib');
+var server = http.createServer(function (req, res) {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.end('Hello World');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-  let savePath = path.resolve(__dirname + '/contracts');
-  const ethAirBaloonsProvider = ethAirBaloons('http://localhost:8545', savePath);
-   let Car = ethAirBaloonsProvider.createSchema({
+server.listen(port, hostname, function () {
+  console.log('Server running at http://' + hostname + ':' + port);
+  var savePath = path.resolve(__dirname + '/contracts');
+  var ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath);
+   var Car = ethAirBalloonsProvider.createSchema({
 	name: "Car",
 	contractName: "carsContract",
 	properties: [
