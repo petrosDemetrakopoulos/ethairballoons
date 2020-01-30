@@ -13,7 +13,7 @@ server.listen(port, hostname, function () {
 	console.log('Server running at http://' + hostname + ':' + port);
 	var savePath = path.resolve(__dirname + '/contracts');
 	var ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath);
-	var Car = ethAirBalloonsProvider.createSchema({
+	var CarSchema = ethAirBalloonsProvider.createSchema({
 		name: "Car",
 		contractName: "carsContract",
 		properties: [
@@ -23,11 +23,16 @@ server.listen(port, hostname, function () {
 			}
 		]
 	});
-	Car.deploy(function(contractInstance, error) {
-		if (!error) {
-			console.log('deployed on address: ' + contractInstance.options.address);
+
+	CarSchema.deploy(function (car, err) {
+		if(err){
+			console.log(err);
 		} else {
-			console.log(error);
+			CarSchema.find(function (res,err) {
+				if(!err){
+					console.log(res);
+				}
+			});
 		}
 	});
 });
