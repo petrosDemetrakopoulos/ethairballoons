@@ -20,18 +20,39 @@ server.listen(port, hostname, function () {
 			{ name: "engine",
 				type: "bytes32",
 				primaryKey: true
+			},
+			{ name: "wheels",
+				type: "uint"
 			}
 		]
 	});
-
-	CarSchema.deploy(function (car, err) {
-		if(err){
+	CarSchema.deploy(function (CarModel, err) {
+		if (err) {
 			console.log(err);
 		} else {
-			CarSchema.find(function (res,err) {
-				if(!err){
-					console.log(res);
+			var newCarObject = {engine: "V8", wheels: 4};
+			var newCarObject2 = {engine: "V9", wheels: 4};
+			CarSchema.save(newCarObject, function (res, err) {
+				if (err){
+					console.log(err);
 				}
+				CarSchema.save(newCarObject2, function (res, err) {
+					if (!err) {
+						console.log("****");
+					} else {
+						console.log(err);
+					}
+					CarSchema.find(function (res, err) {
+						if (!err) {
+							console.log(res);
+						}
+					});
+					CarSchema.findById("V9", function (res, err) {
+						if (!err) {
+							console.log(res);
+						}
+					});
+				});
 			});
 		}
 	});
