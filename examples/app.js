@@ -38,7 +38,7 @@ server.listen(port, hostname, function () {
 				}
 				CarSchema.save(newCarObject2, function (res, err) {
 					if (!err) {
-						console.log("****");
+						console.log(res);
 					} else {
 						console.log(err);
 					}
