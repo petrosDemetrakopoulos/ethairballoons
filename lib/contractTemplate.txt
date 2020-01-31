@@ -30,7 +30,7 @@ contract {{contract.name}} {
 		recordsList.push(ID);
 		facts[ID].listPointer = recordsList.length - 1;
 		numberOfRecords++;
-		return true;
+		return (true);
 	}
 
 	function getRecord({{contract.idDataType}} id) public view returns (string memory payload){
@@ -40,7 +40,7 @@ contract {{contract.name}} {
 	function updateRecord({{contract.idDataType}} id, string memory payload) public returns (bool success){
 		if(!isRecord(id)) revert('it is not record');
 		facts[id].payload = payload;
-		return true;
+		return (true);
 	}
 
 	function getAllRecords() public view returns (string[] memory payloads) {
@@ -59,7 +59,8 @@ function deleteRecord({{contract.idDataType}} id) public returns (bool success) 
     recordsList[rowToDelete] = keyToMove;
     facts[keyToMove].listPointer = rowToDelete;
     recordsList.pop();
-    return true;
+    numberOfRecords--;
+    return (true);
   }
 
 }

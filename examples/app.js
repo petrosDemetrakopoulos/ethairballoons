@@ -49,7 +49,17 @@ server.listen(port, hostname, function () {
 					});
 					CarSchema.findById("V9", function (res, err) {
 						if (!err) {
-							console.log(res);
+							CarSchema.deleteById("V9", function (res, err) {
+								if (!err) {
+									CarSchema.find(function (res, err) {
+										if (!err) {
+											console.log(res);
+										} else {
+											console.log(err);
+										}
+									});
+								}
+							});
 						}
 					});
 				});
