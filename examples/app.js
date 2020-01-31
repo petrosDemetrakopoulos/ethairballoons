@@ -26,7 +26,7 @@ server.listen(port, hostname, function () {
 			}
 		]
 	});
-	CarSchema.deploy(function (CarModel, err) {
+	CarSchema.deploy(function (success, err) {
 		if (err) {
 			console.log(err);
 		} else {
