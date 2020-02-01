@@ -17,8 +17,8 @@ npm i --save ethAirBalloons
 
 # Setup and example
 
-```
-var ethAirBalloons = require('ethAirBallons');
+```JS
+var ethAirBalloons = require('ethAirBalloons');
 var savePath = path.resolve(__dirname + '/contracts');
 var ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath); //ethereum blockchain provider URL, path to save auto generated smart contracts
 
@@ -43,5 +43,6 @@ var CarSchema = ethAirBalloonsProvider.createSchema({
 ```
 
 As you can see you can very easily create a new ethAirbaloons provider by setting only 2 arguments.
-The fist one is the URL of the Ethereum blockchain provider that you want to use (in the example it is set to a local `ganache-cli` provider),
-and the second one is the path where you want to save the automatically generated smart contracts of your models.
+1) the URL of the Ethereum blockchain provider that you want to use
+(in the example it is set to a local `ganache-cli` provider),
+2) the path where you want to save the automatically generated smart contracts of your models.
