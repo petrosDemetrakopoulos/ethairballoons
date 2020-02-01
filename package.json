@@ -2,9 +2,13 @@
   "name": "ethAirBaloons",
   "version": "1.0.0",
   "description": "A model level of abstraction for ethereum blockchain.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "nyc mocha test/test.js --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petrosDemetrakopoulos/ethairballoons"
   },
   "keywords": [
     "ethereum",

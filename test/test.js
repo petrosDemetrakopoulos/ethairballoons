@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var describe = require('mocha').describe;
 var before = require('mocha').before;
 var it = require('mocha').it;
-var ethAirBalloons = require('../');
+var ethAirBalloons = require('../lib');
 var path = require('path');
 var ethAirBalloonsProvider;
 var ethairBaloonsNoSavePath;
@@ -122,7 +122,7 @@ describe('testing save() function when deployed', function () {
 describe('testing find() function', function () {
     it("should contain {engine: \"V8\", wheels: 4}", function (done) {
         CarSchema.find(function (res, err) {
-            expect(res).contains(JSON.stringify({engine: "V8", wheels: 4}));
+            expect(res).deep.include(({engine: 'V8', wheels: 4}));
             done();
         });
     });
@@ -131,7 +131,7 @@ describe('testing find() function', function () {
 describe('testing findById() function', function () {
     it("should return {engine: \"V8\", wheels: 4}", function (done) {
         CarSchema.findById('V8',function (res, err) {
-            expect(res).contains(JSON.stringify({engine: "V8", wheels: 4}));
+            expect(res).deep.equal({engine: "V8", wheels: 4});
             done();
         });
     });
