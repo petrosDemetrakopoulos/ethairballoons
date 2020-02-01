@@ -91,10 +91,10 @@ It returns the saved object and an error object that will be undefined if the ob
 
 Example:
  ```JS
-var newCarObject = {model:"Audi A4", engine: "V8", wheels: 4};
+var newCarObject = {model:'Audi A4', engine: 'V8', wheels: 4};
 Car.save(newCarObject, function (objectSaved, err) {
     if (!err) {
-        console.log("object saved");
+        console.log('object saved');
     }
 });
 ```
@@ -106,13 +106,27 @@ Example:
  ```JS
 Car.find(function (allRecords, err) {
     if (!err) {
-        console.log("object saved");
+        console.log(allRecords);
     }
 });
 ```
 
 findById()
 ----------
+Returns the record with a specific primary key value if exists.
+Otherwise it will return an error object mentioning that 'record with this id does not exist'.
+
+Example:
+ ```JS
+Car.findById('Audi A4', function (record, err) {
+    if (!err) {
+        console.log(record);
+    } else {
+        console.log(err);
+    }
+});
+```
+
 
 deleteById()
 ------------
