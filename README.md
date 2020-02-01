@@ -15,7 +15,7 @@ As transaction fees may be huge, it is strongly advised to only deploy EthAir Ba
 npm i --save ethAirBalloons
 ```
 
-# Setup and example
+# Setup
 
 ```JS
 var ethAirBalloons = require('ethAirBalloons');
@@ -60,7 +60,7 @@ Of course you can (an it is advised) keep the schema definitions in separate .JS
  and the `type` field must be set to one of the legal [Solidity data types](https://solidity.readthedocs.io/en/v0.5.3/types.html).
 
  # Functions of `Schema` object
-
+`Schema` object implements all the functions needed to perform CRUD operations.
 As all blockchains have an asynchronous nature, all functions in the library return a callback function.
 After you initialize a `Schema`, you can call the following functions:
 
@@ -76,19 +76,40 @@ Example:
 
 ```JS
 Car.deploy(function (success, err) {
-		if (err) {
-			console.log(err);
-		} else {
-		    console.log('Deployed successfully');
-		}
+    if (err) {
+        console.log(err);
+    } else {
+        console.log('Deployed successfully');
+    }
 });
 ```
 
 save()
 ------
+Saves a new record in th blockchain. Make sure to set the primary key field in the object you want to save, otherwise an error will be returned.
+It returns the saved object and an error object that will be undefined if the object is saved successfully.
+
+Example:
+ ```JS
+var newCarObject = {model:"Audi A4", engine: "V8", wheels: 4};
+Car.save(newCarObject, function (objectSaved, err) {
+    if (!err) {
+        console.log("object saved");
+    }
+});
+```
 
 find()
 ------
+Returns all the records of our Schema.
+Example:
+ ```JS
+Car.find(function (allRecords, err) {
+    if (!err) {
+        console.log("object saved");
+    }
+});
+```
 
 findById()
 ----------
@@ -98,3 +119,9 @@ deleteById()
 
 updateById()
 ------------
+
+# Tests
+You can run tests by typing `npm test` in the root directory of the library.
+
+# License
+EthAir Balloons are licensed under MIT license.
