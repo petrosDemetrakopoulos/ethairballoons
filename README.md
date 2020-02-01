@@ -76,9 +76,7 @@ Example:
 
 ```JS
 Car.deploy(function (success, err) {
-    if (err) {
-        console.log(err);
-    } else {
+    if (!err) {
         console.log('Deployed successfully');
     }
 });
@@ -121,18 +119,44 @@ Example:
 Car.findById('Audi A4', function (record, err) {
     if (!err) {
         console.log(record);
-    } else {
-        console.log(err);
-    }
+    } 
 });
 ```
 
 
 deleteById()
 ------------
+Deletes the record with a specific primary key value if exists.
+Otherwise it will return an error object mentioning that 'record with this id does not exist'.
+
+Example:
+ ```JS
+Car.deleteById('Audi A4', function (success, err) {
+    if (!err) {
+        console.log('object deleted successfully');
+    } 
+});
+```
 
 updateById()
 ------------
+Updates the record with a specific primary key value if exists.
+Otherwise it will return an error object mentioning that 'record with this id does not exist'.
+It returns the updated record.
+
+The first parameter is the primary key value of the record we want to update.
+The second parameter is the updated object.
+Note that is contrary with save() function it is not necessary to set the primary key field and if you do so, it will NOT be updated.
+
+Example:
+ ```JS
+ var updatedCarObject = { engine: 'V9', wheels: 4 };
+Car.updateById('Audi A4', updatedCarObject, function (updatedObject, err) {
+    if (!err) {
+        console.log('object updated successfully');
+    } 
+});
+```
 
 # Tests
 You can run tests by typing `npm test` in the root directory of the library.
