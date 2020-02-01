@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/petrosDemetrakopoulos/ethairballoons"
   },
+  "bugs": {
+    "url": "https://github.com/petrosDemetrakopoulos/ethairballoons/issues"
+  },
   "keywords": [
     "ethereum",
     "eth",
@@ -17,7 +20,16 @@
     "blockchain",
     "web3",
     "ganache",
-    "model"
+    "model",
+    "ORM",
+    "data",
+    "datastore",
+    "permanent",
+    "storage",
+    "crypto",
+    "cryptocurrencies",
+    "persistent",
+    "schema"
   ],
   "author": "Petros Demetrakopoulos",
   "license": "MIT",
