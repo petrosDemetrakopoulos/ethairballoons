@@ -147,10 +147,11 @@ It returns the updated record.
 The first parameter is the primary key value of the record we want to update.
 The second parameter is the updated object.
 Note that is contrary with save() function it is not necessary to set the primary key field and if you do so, it will NOT be updated.
+If you want to reassign a stored record to a different id you must first delete it and then save a new one with the different primary key value.
 
 Example:
  ```JS
- var updatedCarObject = { engine: 'V9', wheels: 4 };
+var updatedCarObject = { engine: 'V9', wheels: 4 };
 Car.updateById('Audi A4', updatedCarObject, function (updatedObject, err) {
     if (!err) {
         console.log('object updated successfully');
