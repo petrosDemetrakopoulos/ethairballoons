@@ -25,7 +25,7 @@ contract carsContract {
 	}
 
 	function addRecord(string memory payload, bytes32 ID) public returns (bool success) {
-	if(isRecord(ID)) revert('record exists');
+	if(isRecord(ID)) revert('record with this id already exists');
 		facts[ID].payload = payload;
 		recordsList.push(ID);
 		facts[ID].listPointer = recordsList.length - 1;
@@ -34,11 +34,12 @@ contract carsContract {
 	}
 
 	function getRecord(bytes32 id) public view returns (string memory payload){
+	if(!isRecord(id)) revert('record with this id not exists');
 		return (facts[id].payload);
 	}
 
 	function updateRecord(bytes32 id, string memory payload) public returns (bool success){
-		if(!isRecord(id)) revert('it is not record');
+		if(!isRecord(id)) revert('record with this id not exists');
 		facts[id].payload = payload;
 		return (true);
 	}
@@ -53,7 +54,7 @@ contract carsContract {
 	}
 
 function deleteRecord(bytes32 id) public returns (bool success) {
-    if(!isRecord(id)) revert('it is not record');
+    if(!isRecord(id)) revert('record with this id not exists');
     uint rowToDelete = facts[id].listPointer;
     bytes32 keyToMove = recordsList[recordsList.length-1];
     recordsList[rowToDelete] = keyToMove;
