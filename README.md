@@ -28,7 +28,8 @@ var Car = ethAirBalloonsProvider.createSchema({
 		name: "Car",
 		contractName: "carsContract",
 		properties: [
-		    {   name: "model",
+		    {
+		        name: "model",
 				type: "bytes32",
 				isPrimaryKey: true
 			},
@@ -65,6 +66,23 @@ After you initialize a `Schema`, you can call the following functions:
 
 deploy()
 --------
+It is the fist function that you must call in order to set your model up "up and running".
+This function generates the solidity Smart contract of your model and it deploys
+it in the Ethereum based blockchain that you have set in the first step.
+It returns a boolean indicating if the deploy is successfull and an error object that will be undefined if the deploy is successfull.
+After deploy completes you can call the other functions.
+
+Example:
+
+```JS
+Car.deploy(function (success, err) {
+		if (err) {
+			console.log(err);
+		} else {
+		    console.log('Deployed successfully');
+		}
+});
+```
 
 save()
 ------
