@@ -24,7 +24,7 @@ var savePath = path.resolve(__dirname + '/contracts');
 var ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath); 
 //ethereum blockchain provider URL, path to save auto generated smart contracts
 
-var CarSchema = ethAirBalloonsProvider.createSchema({
+var Car = ethAirBalloonsProvider.createSchema({
 		name: "Car",
 		contractName: "carsContract",
 		properties: [
@@ -48,3 +48,6 @@ As you can see you can very easily create a new ethAirbaloons provider (line 3) 
 1) the URL of the Ethereum blockchain provider that you want to use
 (in the example it is set to a local `ganache-cli` provider),
 2) the path where you want to save the automatically generated smart contracts of your models.
+
+After you create the provider you can create new data schemas using the `createSchema()` function and pass the schema details in JS object format.
+Of course you can (an it is advised) keep the schema definitions in separate .JSON files and then import them using the `require()` statement in the top of your file.
