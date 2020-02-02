@@ -1,6 +1,6 @@
 {
   "name": "ethairballoons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A model level of abstraction for ethereum blockchain.",
   "main": "lib/index.js",
   "scripts": {
