@@ -1,7 +1,7 @@
 {
   "name": "ethairballoons",
   "version": "1.0.2",
-  "description": "A strictly typed ORM library for Ethereum blockchain..",
+  "description": "A strictly typed ORM library for Ethereum blockchain",
   "main": "lib/index.js",
   "scripts": {
     "test": "nyc mocha test/test.js --exit"
