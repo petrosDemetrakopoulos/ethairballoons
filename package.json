@@ -1,5 +1,5 @@
 {
-  "name": "ethAirBaloons",
+  "name": "ethairballoons",
   "version": "1.0.0",
   "description": "A model level of abstraction for ethereum blockchain.",
   "main": "lib/index.js",
