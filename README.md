@@ -20,7 +20,7 @@ npm i --save ethairballoons
 # Setup
 
 ```JS
-var ethAirBalloons = require('ethAirBalloons');
+var ethAirBalloons = require('ethairballoons');
 var path = require('path');
 var savePath = path.resolve(__dirname + '/contracts');
 
