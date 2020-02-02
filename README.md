@@ -1,5 +1,5 @@
 # EthAir Balloons
-<img src="https://raw.githubusercontent.com/petrosDemetrakopoulos/ethairballoons/master/logo_official.png?token=AASKIPKA55VLH5TPN32NOM26GYKSU" width="300">
+<img src="https://raw.githubusercontent.com/petrosDemetrakopoulos/ethairballoons/master/logo_official.png" width="300">
 A strictly typed ORM library for Ethereum blockchain.
 It allows you to use Ethereum blockchain as a persistent storage in an organized and model-oriented way <strong>without writing custom complex Smart contracts</strong>.
 
