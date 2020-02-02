@@ -1,6 +1,6 @@
 {
   "name": "ethairballoons",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A strictly typed ORM library for Ethereum blockchain",
   "main": "lib/index.js",
   "scripts": {
