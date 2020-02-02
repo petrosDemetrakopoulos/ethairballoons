@@ -19,6 +19,7 @@ npm i --save ethAirBalloons
 
 ```JS
 var ethAirBalloons = require('ethAirBalloons');
+var path = require('path');
 var savePath = path.resolve(__dirname + '/contracts');
 
 var ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath); 
@@ -31,7 +32,7 @@ var Car = ethAirBalloonsProvider.createSchema({
 		    {
 		        name: "model",
 				type: "bytes32",
-				isPrimaryKey: true
+				primaryKey: true
 			},
 			{ 
 			    name: "engine",
@@ -56,7 +57,7 @@ Of course you can (an it is advised) keep the schema definitions in separate .JS
 
  `createSchema()` returns a  `Schema` object.
  In order to successfully initialize a `Schema` object, *only one* property
- of the schema definition must have `isPrimaryKey` field set to `true` (as shown in the example above)
+ of the schema definition must have `primaryKey` field set to `true` (as shown in the example above)
  and the `type` field must be set to one of the legal [Solidity data types](https://solidity.readthedocs.io/en/v0.5.3/types.html).
 
  # Functions of `Schema` object
