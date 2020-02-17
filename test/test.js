@@ -5,13 +5,13 @@ var it = require('mocha').it;
 var ethAirBalloons = require('../lib');
 var path = require('path');
 var ethAirBalloonsProvider;
-var ethairBaloonsNoSavePath;
+var ethairBalloonsNoSavePath;
 var CarSchema;
 before(function (done) {
     var savePath = path.resolve(__dirname + '/contracts');
     ethAirBalloonsProvider = new ethAirBalloons('http://localhost:8545', savePath);
-    ethairBaloonsNoSavePath = new ethAirBalloons('http://localhost:8545', null);
-    ethairBaloonsNoSavePath = new ethAirBalloons('http://localhost:8545', null);
+    ethairBalloonsNoSavePath = new ethAirBalloons('http://localhost:8545', null);
+    ethairBalloonsNoSavePath = new ethAirBalloons('http://localhost:8545', null);
     setTimeout(done, 1000);
 });
 
@@ -53,7 +53,7 @@ describe('testing create schema', function () {
 
 describe('testing create schema without contract save path', function () {
     it("should throw 'You must set a path where generated Smart contracts will be stored' error", function (done) {
-        expect(() => ethairBaloonsNoSavePath.createSchema({
+        expect(() => ethairBalloonsNoSavePath.createSchema({
             name: "Car",
             contractName: "carContracts",
             properties: [
@@ -110,7 +110,7 @@ describe('testing deploy() function', function () {
 });
 
 describe('testing save() function when deployed', function () {
-    it("should return true", function (done) {
+    it("should return {engine: \"V8\", wheels: 4}", function (done) {
         var newCarObject = {engine: "V8", wheels: 4};
         CarSchema.save(newCarObject, function (res, err) {
             expect(res).to.deep.equal({engine: "V8", wheels: 4});

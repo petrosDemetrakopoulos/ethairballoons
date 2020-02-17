@@ -12,7 +12,6 @@ contract {{contract.name}} {
 		uint listPointer;
 	}
 
-
 	mapping({{contract.idDataType}} => {{contract.structName}}) public facts;
 
 	function isRecord({{contract.idDataType}} recordAddress) public view returns (bool isRec) {

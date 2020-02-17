@@ -12,7 +12,6 @@ contract carsContract {
 		uint listPointer;
 	}
 
-
 	mapping(bytes32 => Car) public facts;
 
 	function isRecord(bytes32 recordAddress) public view returns (bool isRec) {

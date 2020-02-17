@@ -4,7 +4,7 @@
   "description": "A strictly typed ORM library for Ethereum blockchain",
   "main": "lib/index.js",
   "scripts": {
-    "test": "nyc mocha test/test.js --exit"
+    "test": "nyc mocha --check-leaks test/test.js --exit"
   },
   "repository": {
     "type": "git",
@@ -29,14 +29,16 @@
     "crypto",
     "cryptocurrencies",
     "persistent",
-    "schema"
+    "schema",
+    "backend",
+    "db"
   ],
   "author": "Petros Demetrakopoulos",
   "license": "MIT",
   "dependencies": {
-    "handlebars": "^4.7.2",
+    "handlebars": "^4.7.3",
     "solc": "^0.6.2",
-    "web3": "^1.2.5-rc.0"
+    "web3": "^1.2.6"
   },
   "devDependencies": {
     "chai": "^4.2.0",
