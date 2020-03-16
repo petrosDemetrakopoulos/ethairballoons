@@ -4,15 +4,26 @@ var before = require('mocha').before;
 var it = require('mocha').it;
 var ethAirBalloons = require('../lib');
 var path = require('path');
+var Web3 = require('web3');
 var ethAirBalloonsProvider;
 var ethairBalloonsNoSavePath;
+var ethairBaloonsAccountSet;
+var ethairBaloonsNoPK;
 var CarSchema;
 before(function (done) {
     var savePath = path.resolve(__dirname + '/contracts');
     ethAirBalloonsProvider = new ethAirBalloons('http://localhost:8545', savePath);
     ethairBalloonsNoSavePath = new ethAirBalloons('http://localhost:8545', null);
     ethairBalloonsNoSavePath = new ethAirBalloons('http://localhost:8545', null);
-    setTimeout(done, 1000);
+    ethairBaloonsAccountSet = new ethAirBalloons('http://localhost:8545', savePath);
+    ethairBaloonsNoPK = new ethAirBalloons('http://localhost:8545', savePath);
+    var web3 = new Web3(new Web3.providers.WebsocketProvider('http://localhost:8545'));
+    web3.eth.getAccounts(function (err, accounts) {
+        if (!err) {
+            var account = accounts[1];
+            ethairBaloonsAccountSet.account = account;
+            setTimeout(done, 1200);
+        }});
 });
 
 describe('testing create schema', function () {
@@ -49,6 +60,9 @@ describe('testing create schema', function () {
     it('should have function deleteById', function () {
         expect(CarSchema).to.have.property('findById').that.is.a('function');
     });
+    it('should have function updateById', function () {
+        expect(CarSchema).to.have.property('updateById').that.is.a('function');
+    });
 });
 
 describe('testing create schema without contract save path', function () {
@@ -69,6 +83,65 @@ describe('testing create schema without contract save path', function () {
             ]
         })).to.throw('You must set a path where generated Smart contracts will be stored');
         done();
+    });
+});
+
+describe('testing create schema without primary key', function () {
+    it("should throw 'One property must be primary key of the model.' error" , function (done) {
+        expect(() => ethairBaloonsNoPK.createSchema({
+            name: "Car",
+            contractName: "carContracts",
+            properties: [
+                {
+                    name: "engine",
+                    type: "bytes32"
+                },
+                {
+                    name: "wheels",
+                    type: "uint"
+                }
+            ]
+        })).to.throw('One property must be primary key of the model.');
+        done();
+    });
+});
+
+describe('testing create schema with account set', function () {
+    before(function (done) {
+        CarSchema = ethairBaloonsAccountSet.createSchema({
+            name: "Car",
+            contractName: "carsContract",
+            properties: [
+                {
+                    name: "engine",
+                    type: "bytes32",
+                    primaryKey: true
+                },
+                {
+                    name: "wheels",
+                    type: "uint"
+                }
+            ]
+        });
+        done();
+    });
+    it('should have function deploy', function () {
+        expect(CarSchema).to.have.property('deploy').that.is.a('function');
+    });
+    it('should have function save', function () {
+        expect(CarSchema).to.have.property('save').that.is.a('function');
+    });
+    it('should have function find', function () {
+        expect(CarSchema).to.have.property('find').that.is.a('function');
+    });
+    it('should have function findById', function () {
+        expect(CarSchema).to.have.property('findById').that.is.a('function');
+    });
+    it('should have function deleteById', function () {
+        expect(CarSchema).to.have.property('findById').that.is.a('function');
+    });
+    it('should have function updateById', function () {
+        expect(CarSchema).to.have.property('updateById').that.is.a('function');
     });
 });
 
@@ -94,6 +167,15 @@ describe('testing find() function when not deployed', function () {
 describe('testing findById() function when not deployed', function () {
     it("should return 'Model is not deployed error'", function (done) {
         CarSchema.findById('V8', function (res, err) {
+            expect(err.message).equal('Model is not deployed');
+            done();
+        });
+    });
+});
+
+describe('testing updateById() function when not deployed', function () {
+    it("should return 'Model is not deployed error'", function (done) {
+        CarSchema.updateById('V8', {engine: "V8", wheels: 8}, function (res, err) {
             expect(err.message).equal('Model is not deployed');
             done();
         });
@@ -132,6 +214,15 @@ describe('testing findById() function', function () {
     it("should return {engine: \"V8\", wheels: 4}", function (done) {
         CarSchema.findById('V8',function (res, err) {
             expect(res).deep.equal({engine: "V8", wheels: 4});
+            done();
+        });
+    });
+});
+
+describe('testing updateById() function', function () {
+    it("should return {engine: \"V8\", wheels: 8}", function (done) {
+        CarSchema.updateById('V8', {engine: "V8", wheels: 8},function (res, err) {
+            expect(res).deep.equal({engine: "V8", wheels: 8});
             done();
         });
     });
