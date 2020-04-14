@@ -1,4 +1,4 @@
-pragma solidity ^0.6.1;
+pragma solidity ^0.6.2;
 pragma experimental ABIEncoderV2;
 contract carsContract {
 	bytes32 public dataId;

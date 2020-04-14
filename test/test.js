@@ -9,7 +9,9 @@ var ethAirBalloonsProvider;
 var ethairBalloonsNoSavePath;
 var ethairBaloonsAccountSet;
 var ethairBaloonsNoPK;
+var ethairBlloonsNoProviderSet;
 var CarSchema;
+var failedSchema;
 before(function (done) {
     var savePath = path.resolve(__dirname + '/contracts');
     ethAirBalloonsProvider = new ethAirBalloons('http://localhost:8545', savePath);
@@ -17,6 +19,7 @@ before(function (done) {
     ethairBalloonsNoSavePath = new ethAirBalloons('http://localhost:8545', null);
     ethairBaloonsAccountSet = new ethAirBalloons('http://localhost:8545', savePath);
     ethairBaloonsNoPK = new ethAirBalloons('http://localhost:8545', savePath);
+    ethairBlloonsNoProviderSet =  new ethAirBalloons('http://localhost:8900', savePath);
     var web3 = new Web3(new Web3.providers.WebsocketProvider('http://localhost:8545'));
     web3.eth.getAccounts(function (err, accounts) {
         if (!err) {
@@ -247,6 +250,24 @@ describe('testing deploy() function when already deployed', function () {
 });
 
 describe('testing deploy() fail schema', function () {
+    before(function (done) {
+        failedSchema = ethairBlloonsNoProviderSet.createSchema({
+            name: "Car",
+            contractName: "carsContract",
+            properties: [
+                {
+                    name: "engine",
+                    type: "bytes32",
+                    primaryKey: true
+                },
+                {
+                    name: "wheels",
+                    type: "uint"
+                }
+            ]
+        });
+        done();
+    });
     it("should throw error 'name property is required'", function (done) {
         expect(() => ethAirBalloonsProvider.createSchema({
             contractName: "carsContract",
@@ -363,5 +384,12 @@ describe('testing deploy() fail schema', function () {
             ]
         })).to.throw('One property must be primary key of the model.');
         done();
+    });
+
+    it("should return error 'connection not open'", function (done) {
+        failedSchema.deploy(function (success, err) {
+            expect(err.message).to.equal('connection not open');
+            done();
+        })
     });
 });
