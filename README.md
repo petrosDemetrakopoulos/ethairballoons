@@ -24,7 +24,7 @@ var ethAirBalloons = require('ethairballoons');
 var path = require('path');
 var savePath = path.resolve(__dirname + '/contracts');
 
-var ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath); 
+var ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath);
 //ethereum blockchain provider URL, path to save auto generated smart contracts
 
 var Car = ethAirBalloonsProvider.createSchema({
@@ -36,7 +36,7 @@ var Car = ethAirBalloonsProvider.createSchema({
 				type: "bytes32",
 				primaryKey: true
 			},
-			{ 
+			{
 			    name: "engine",
 			    type: "bytes32",
 			},
@@ -122,7 +122,7 @@ Example:
 Car.findById('Audi A4', function (record, err) {
     if (!err) {
         console.log(record);
-    } 
+    }
 });
 ```
 
@@ -137,7 +137,7 @@ Example:
 Car.deleteById('Audi A4', function (success, err) {
     if (!err) {
         console.log('object deleted successfully');
-    } 
+    }
 });
 ```
 
@@ -158,9 +158,14 @@ var updatedCarObject = { engine: 'V9', wheels: 4 };
 Car.updateById('Audi A4', updatedCarObject, function (updatedObject, err) {
     if (!err) {
         console.log('object updated successfully');
-    } 
+    }
 });
 ```
+
+setAccount(account)
+------------
+With this function you can explicitly set the ETH account that you want to use for the model.
+If not set, account is set by default to the first account of the provider.
 
 # Tests
 You can run tests by typing `npm test` in the root directory of the library.
