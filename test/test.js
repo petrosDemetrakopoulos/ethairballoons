@@ -437,7 +437,7 @@ describe('testing deploy() function when account is not set', function () {
 
         it("should return error 'connection not open'", function (done) {
             failedSchema.deploy(function (success, err) {
-                expect(err.message).to.equal('connection not open');
+                expect(err.message).to.contain('connection not open');
                 done();
             })
         });
