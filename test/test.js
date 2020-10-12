@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var describe = require('mocha').describe;
 var before = require('mocha').before;
 var it = require('mocha').it;
+var ganache = require('ganache-core');
 var ethAirBalloons = require('../lib');
 var path = require('path');
 var Web3 = require('web3');
@@ -14,6 +15,18 @@ var CarSchema;
 var carSchemaNoAccount;
 var failedSchema;
 var account;
+var ganacheServer;
+
+before("Setup ganache server", function (done) {
+    ganacheServer = ganache.server({
+        // means we can create as complex function calls as we want
+        gasLimit: Number.MAX_SAFE_INTEGER,
+        // means we have unlimited $$$ to run stuff on the Ethereum network
+        default_balance_ether: Number.MAX_SAFE_INTEGER,
+    });
+    ganacheServer.listen(8545, done);
+});
+
 before(function (done) {
     var savePath = path.resolve(__dirname + '/contracts');
     ethAirBalloonsProvider = new ethAirBalloons('http://localhost:8545', savePath);
@@ -27,6 +40,12 @@ before(function (done) {
             account = accounts[1];
             setTimeout(done, 1200);
         }});
+});
+
+after("Close ganache server", function() {
+    if(ganacheServer) {
+        ganacheServer.close();
+    }
 });
 
 describe('testing create schema', function () {
@@ -418,7 +437,7 @@ describe('testing deploy() function when account is not set', function () {
 
         it("should return error 'connection not open'", function (done) {
             failedSchema.deploy(function (success, err) {
-                expect(err.message).to.equal('connection not open');
+                expect(err.message).to.contain('connection not open');
                 done();
             })
         });
