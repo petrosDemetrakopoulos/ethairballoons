@@ -234,6 +234,15 @@ describe('testing deploy() function when account is not set', function () {
         });
     });
 
+    describe('testing deleteById() function when not deployed', function () {
+        it("should return 'Model is not deployed error'", function (done) {
+            CarSchema.deleteById('V8', function (res, err) {
+                expect(err.message).equal('Model is not deployed');
+                done();
+            });
+        });
+    });
+
     describe('testing deploy() function', function () {
         it("should return true", function (done) {
             CarSchema.deploy(function (success, err) {
@@ -293,6 +302,16 @@ describe('testing deploy() function when account is not set', function () {
         it("should return error ''", function (done) {
             CarSchema.deploy(function (success, err) {
                 expect(err.message).to.equal('Model carsContract is already deployed.');
+                done();
+            });
+        });
+    });
+
+    describe('testing save() function whithout primary key field set', function () {
+        it("should return error 'Primary key field does not exist'", function (done) {
+            var newCarObject = { wheels: 4 };
+            CarSchema.save(newCarObject, function (res, err) {
+                expect(err.message).to.equal('Primary key field does not exist');
                 done();
             });
         });
