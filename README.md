@@ -41,7 +41,7 @@ var Car = ethAirBalloonsProvider.createSchema({
 			    type: "bytes32",
 			},
 			{   name: "cylinders",
-				type: "uint"
+			    type: "uint"
 			}
 		]
 	});
