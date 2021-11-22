@@ -87,8 +87,6 @@ describe('testing create schema', function () {
     });
 });
 
-
-
     describe('testing create schema without contract save path', function () {
         it("should throw 'You must set a path where generated Smart contracts will be stored' error", function (done) {
             expect(() => ethairBalloonsNoSavePath.createSchema({
@@ -189,9 +187,9 @@ describe('testing deploy() function when account is not set', function () {
         });
     done();
     })
-    it("should return true", function (done) {
-        carSchemaNoAccount.deploy(function (success, err) {
-            expect(success).to.equal(true);
+    it("should return false", function (done) {
+        carSchemaNoAccount.deploy(function (err, success) {
+            expect(success).to.equal(false);
             done();
         });
     });
@@ -200,7 +198,7 @@ describe('testing deploy() function when account is not set', function () {
     describe('testing save() function when not deployed', function () {
         it("should return 'Model is not deployed error'", function (done) {
             var newCarObject = { engine: "V8", wheels: 4 };
-            CarSchema.save(newCarObject, function (res, err) {
+            CarSchema.save(newCarObject, function (err, res) {
                 expect(err.message).equal('Model is not deployed');
                 done();
             });
@@ -209,7 +207,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing find() function when not deployed', function () {
         it("should return 'Model is not deployed error'", function (done) {
-            CarSchema.find(function (res, err) {
+            CarSchema.find(function (err, res) {
                 expect(err.message).equal('Model is not deployed');
                 done();
             });
@@ -218,7 +216,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing findById() function when not deployed', function () {
         it("should return 'Model is not deployed error'", function (done) {
-            CarSchema.findById('V8', function (res, err) {
+            CarSchema.findById('V8', function (err, res) {
                 expect(err.message).equal('Model is not deployed');
                 done();
             });
@@ -227,7 +225,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing updateById() function when not deployed', function () {
         it("should return 'Model is not deployed error'", function (done) {
-            CarSchema.updateById('V8', { engine: "V8", wheels: 8 }, function (res, err) {
+            CarSchema.updateById('V8', { engine: "V8", wheels: 8 }, function (err, res) {
                 expect(err.message).equal('Model is not deployed');
                 done();
             });
@@ -236,7 +234,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing deleteById() function when not deployed', function () {
         it("should return 'Model is not deployed error'", function (done) {
-            CarSchema.deleteById('V8', function (res, err) {
+            CarSchema.deleteById('V8', function (err, res) {
                 expect(err.message).equal('Model is not deployed');
                 done();
             });
@@ -245,7 +243,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing deploy() function', function () {
         it("should return true", function (done) {
-            CarSchema.deploy(function (success, err) {
+            CarSchema.deploy(function (err, success) {
                 expect(success).to.equal(true);
                 done();
             });
@@ -255,7 +253,7 @@ describe('testing deploy() function when account is not set', function () {
     describe('testing save() function when deployed', function () {
         it("should return {engine: \"V8\", wheels: 4}", function (done) {
             var newCarObject = { engine: "V8", wheels: 4 };
-            CarSchema.save(newCarObject, function (res, err) {
+            CarSchema.save(newCarObject, function (err, res) {
                 expect(res).to.deep.equal({ engine: "V8", wheels: 4 });
                 done();
             });
@@ -264,7 +262,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing find() function', function () {
         it("should contain {engine: \"V8\", wheels: 4}", function (done) {
-            CarSchema.find(function (res, err) {
+            CarSchema.find(function (err, res) {
                 expect(res).deep.include(({ engine: 'V8', wheels: 4 }));
                 done();
             });
@@ -273,7 +271,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing findById() function', function () {
         it("should return {engine: \"V8\", wheels: 4}", function (done) {
-            CarSchema.findById('V8', function (res, err) {
+            CarSchema.findById('V8', function (err, res) {
                 expect(res).deep.equal({ engine: "V8", wheels: 4 });
                 done();
             });
@@ -282,7 +280,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing updateById() function', function () {
         it("should return {engine: \"V8\", wheels: 8}", function (done) {
-            CarSchema.updateById('V8', { engine: "V8", wheels: 8 }, function (res, err) {
+            CarSchema.updateById('V8', { engine: "V8", wheels: 8 }, function (err, res) {
                 expect(res).deep.equal({ engine: "V8", wheels: 8 });
                 done();
             });
@@ -291,7 +289,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing deleteById() function', function () {
         it("should return true", function (done) {
-            CarSchema.deleteById('V8', function (res, err) {
+            CarSchema.deleteById('V8', function (err, res) {
                 expect(res).to.equal(true);
                 done();
             });
@@ -300,7 +298,7 @@ describe('testing deploy() function when account is not set', function () {
 
     describe('testing deploy() function when already deployed', function () {
         it("should return error ''", function (done) {
-            CarSchema.deploy(function (success, err) {
+            CarSchema.deploy(function (err, success) {
                 expect(err.message).to.equal('Model carsContract is already deployed.');
                 done();
             });
@@ -310,7 +308,7 @@ describe('testing deploy() function when account is not set', function () {
     describe('testing save() function whithout primary key field set', function () {
         it("should return error 'Primary key field does not exist'", function (done) {
             var newCarObject = { wheels: 4 };
-            CarSchema.save(newCarObject, function (res, err) {
+            CarSchema.save(newCarObject, function (err, res) {
                 expect(err.message).to.equal('Primary key field does not exist');
                 done();
             });
@@ -455,7 +453,7 @@ describe('testing deploy() function when account is not set', function () {
         });
 
         it("should return error 'connection not open'", function (done) {
-            failedSchema.deploy(function (success, err) {
+            failedSchema.deploy(function (err, success) {
                 expect(err.message).to.contain('connection not open');
                 done();
             })

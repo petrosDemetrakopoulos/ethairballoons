@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.6.2;
+pragma solidity >=0.6.2;
 pragma experimental ABIEncoderV2;
 contract carsContractNoAcc {
 	bytes32 public dataId;
