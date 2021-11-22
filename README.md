@@ -78,7 +78,7 @@ After deploy completes you can call the other functions.
 Example:
 
 ```JS
-Car.deploy(function (success, err) {
+Car.deploy(function (err, success) {
     if (!err) {
         console.log('Deployed successfully');
     }
@@ -93,7 +93,7 @@ It returns the saved object and an error object that will be undefined if the ob
 Example:
  ```JS
 var newCarObject = {model:'Audi A4', engine: 'V8', wheels: 4};
-Car.save(newCarObject, function (objectSaved, err) {
+Car.save(newCarObject, function (err, objectSaved) {
     if (!err) {
         console.log('object saved');
     }
@@ -105,7 +105,7 @@ find()
 Returns all the records of our Schema.
 Example:
  ```JS
-Car.find(function (allRecords, err) {
+Car.find(function (err, allRecords) {
     if (!err) {
         console.log(allRecords);
     }
@@ -119,7 +119,7 @@ Otherwise it will return an error object mentioning that 'record with this id do
 
 Example:
  ```JS
-Car.findById('Audi A4', function (record, err) {
+Car.findById('Audi A4', function (err, record) {
     if (!err) {
         console.log(record);
     }
@@ -134,7 +134,7 @@ Otherwise it will return an error object mentioning that 'record with this id do
 
 Example:
  ```JS
-Car.deleteById('Audi A4', function (success, err) {
+Car.deleteById('Audi A4', function (err, success) {
     if (!err) {
         console.log('object deleted successfully');
     }
@@ -155,7 +155,7 @@ If you want to reassign a stored record to a different id you must first delete 
 Example:
  ```JS
 var updatedCarObject = { engine: 'V9', wheels: 4 };
-Car.updateById('Audi A4', updatedCarObject, function (updatedObject, err) {
+Car.updateById('Audi A4', updatedCarObject, function (err, updatedObject) {
     if (!err) {
         console.log('object updated successfully');
     }
