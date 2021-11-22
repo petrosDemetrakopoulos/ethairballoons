@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: {{contract.license}}
-pragma solidity ^0.6.2;
+pragma solidity >=0.6.2;
 pragma experimental ABIEncoderV2;
 contract {{contract.name}} {
 	{{contract.idDataType}} public dataId;
