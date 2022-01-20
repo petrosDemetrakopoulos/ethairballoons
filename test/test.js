@@ -256,6 +256,16 @@ describe('testing deploy() function when account is not set', function () {
         });
     });
 
+    describe('testing save() function with data not matching the schema', function () {
+        it("should return {engine: \"V8\", wheels: 4}", function (done) {
+            var newCarObject = { engine: "V8", invalidField: 4 };
+            CarSchema.save(newCarObject, function (err, res) {
+                expect(err.message).to.equal('Instance does not match Schema definition');
+                done();
+            });
+        });
+    });
+
     describe('testing save() function when deployed', function () {
         it("should return {engine: \"V8\", wheels: 4}", function (done) {
             var newCarObject = { engine: "V8", wheels: 4 };
@@ -279,6 +289,16 @@ describe('testing deploy() function when account is not set', function () {
         it("should return {engine: \"V8\", wheels: 4}", function (done) {
             CarSchema.findById('V8', function (err, res) {
                 expect(res).deep.equal({ engine: "V8", wheels: 4 });
+                done();
+            });
+        });
+    });
+
+    describe('testing updateById() function with data not matching the schema', function () {
+        it("should return {engine: \"V8\", wheels: 4}", function (done) {
+            var newCarObject = { engine: "V8", invalidField: 4 };
+            CarSchema.updateById('V8', newCarObject, function (err, res) {
+                expect(err.message).to.equal('Instance does not match Schema definition');
                 done();
             });
         });
