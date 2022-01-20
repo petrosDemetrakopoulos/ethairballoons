@@ -62,6 +62,12 @@ describe('testing create schema', function () {
                 {
                     name: "wheels",
                     type: "uint"
+                },
+                {
+                    name: "style",
+                    type: "enum",
+                    values: ["coupe", "convertible"],
+                    defaultValue: "coupe"
                 }
             ]
         });
@@ -449,6 +455,103 @@ describe('testing deploy() function when account is not set', function () {
                     }
                 ]
             })).to.throw('One property must be primary key of the model.');
+            done();
+        });
+
+        it("should throw error 'Property at index 2 is missing \'values\' property which is mandatory for fields of type enum.", function (done) {
+            expect(() => ethAirBalloonsProvider.createSchema({
+                name: "Car",
+                contractName: "carContracts",
+                properties: [
+                    {
+                        name: "engine",
+                        type: "bytes32",
+                        primaryKey: true
+                    },
+                    {
+                        name: "wheels",
+                        type: "uint"
+                    },
+                    {
+                        name: "style",
+                        type: "enum"
+                    }
+                ]
+            })).to.throw('Property at index 2 is missing \'values\' property which is mandatory for fields of type enum.');
+            done();
+        });
+
+        it("should throw error 'Property at index 2 is missing \'defaultValue\' property which is mandatory for fields of type enum.", function (done) {
+            expect(() => ethAirBalloonsProvider.createSchema({
+                name: "Car",
+                contractName: "carContracts",
+                properties: [
+                    {
+                        name: "engine",
+                        type: "bytes32",
+                        primaryKey: true
+                    },
+                    {
+                        name: "wheels",
+                        type: "uint"
+                    },
+                    {
+                        name: "style",
+                        type: "enum",
+                        values: ["sedan", "coupe"]
+                    }
+                ]
+            })).to.throw('Property at index 2 is missing \'defaultValue\' property which is mandatory for fields of type enum.');
+            done();
+        });
+
+        it("should throw error \'defaultValue\' is not included in the set of \'values\'. The defaultValue of an enum type must be included in the set of values.", function (done) {
+            expect(() => ethAirBalloonsProvider.createSchema({
+                name: "Car",
+                contractName: "carContracts",
+                properties: [
+                    {
+                        name: "engine",
+                        type: "bytes32",
+                        primaryKey: true
+                    },
+                    {
+                        name: "wheels",
+                        type: "uint"
+                    },
+                    {
+                        name: "style",
+                        type: "enum",
+                        values: ["sedan", "coupe"],
+                        defaultValue: "notIncludedInValues"
+                    }
+                ]
+            })).to.throw('\'defaultValue\' is not included in the set of \'values\'. The defaultValue of an enum type must be included in the set of values.');
+            done();
+        });
+
+        it("should throw error Property at index 2 \'values\' must contain only unique values. It seems duplicate values exist", function (done) {
+            expect(() => ethAirBalloonsProvider.createSchema({
+                name: "Car",
+                contractName: "carContracts",
+                properties: [
+                    {
+                        name: "engine",
+                        type: "bytes32",
+                        primaryKey: true
+                    },
+                    {
+                        name: "wheels",
+                        type: "uint"
+                    },
+                    {
+                        name: "style",
+                        type: "enum",
+                        values: ["sedan", "coupe", "sedan"],
+                        defaultValue: "sedan"
+                    }
+                ]
+            })).to.throw('Property at index 2 \'values\' must contain only unique values. It seems duplicate values exist');
             done();
         });
 
