@@ -26,7 +26,10 @@ before('Setup ganache server', function (done) {
     // means we can create as complex function calls as we want
     gasLimit: Number.MAX_SAFE_INTEGER,
     // means we have unlimited $$$ to run stuff on the Ethereum network
-    default_balance_ether: Number.MAX_SAFE_INTEGER
+    default_balance_ether: Number.MAX_SAFE_INTEGER,
+    logger: {
+      log () { return '' }
+    }
   })
   ganacheServer.listen(8545, done)
 })
