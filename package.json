@@ -38,6 +38,10 @@
   ],
   "author": "Petros Demetrakopoulos",
   "license": "MIT",
+  "funding": {
+    "type": "individual",
+    "url": "https://www.buymeacoffee.com/psdeme"
+  },
   "dependencies": {
     "handlebars": "^4.7.7",
     "solc": "^0.8.11",
