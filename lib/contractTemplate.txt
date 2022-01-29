@@ -63,5 +63,4 @@ function deleteRecord({{contract.idDataType}} id) public returns (bool success) 
     numberOfRecords--;
     return (true);
   }
-
 }
