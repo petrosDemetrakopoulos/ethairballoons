@@ -63,5 +63,4 @@ function deleteRecord(bytes32 id) public returns (bool success) {
     numberOfRecords--;
     return (true);
   }
-
 }
