@@ -20,14 +20,14 @@ npm i --save ethairballoons
 # Setup
 
 ```JS
-var ethAirBalloons = require('ethairballoons');
-var path = require('path');
-var savePath = path.resolve(__dirname + '/contracts');
+const ethAirBalloons = require('ethairballoons');
+const path = require('path');
+let savePath = path.resolve(__dirname + '/contracts');
 
-var ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath);
+const ethAirBalloonsProvider = ethAirBalloons('http://localhost:8545', savePath);
 //ethereum blockchain provider URL, path to save auto generated smart contracts
 
-var Car = ethAirBalloonsProvider.createSchema({
+const Car = ethAirBalloonsProvider.createSchema({
     name: "Car",
     contractName: "carsContract",
     properties: [{
@@ -92,7 +92,7 @@ It returns the saved object and an error object that will be undefined if the ob
 
 Example:
  ```JS
-var newCarObject = {model:'Audi A4', engine: 'V8', wheels: 4};
+const newCarObject = {model:'Audi A4', engine: 'V8', wheels: 4};
 Car.save(newCarObject, function (err, objectSaved) {
     if (!err) {
         console.log('object saved');
@@ -154,7 +154,7 @@ If you want to reassign a stored record to a different id you must first delete 
 
 Example:
  ```JS
-var updatedCarObject = { engine: 'V9', wheels: 4 };
+const updatedCarObject = { engine: 'V9', wheels: 4 };
 Car.updateById('Audi A4', updatedCarObject, function (err, updatedObject) {
     if (!err) {
         console.log('object updated successfully');
