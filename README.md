@@ -167,6 +167,9 @@ setAccount(account)
 With this function you can explicitly set the ETH account that you want to use for the model.
 If not set, account is set by default to the first account of the provider.
 
+# Example project
+You can find a detailed and documented example project that implement a REST API for CRUD operations in the ethereum blockchain through EthairBalloon models in [this Github repo](https://github.com/petrosDemetrakopoulos/ethairballoons-CRUD-API)
+
 # Tests
 You can run tests by typing `npm test` in the root directory of the library.
 
