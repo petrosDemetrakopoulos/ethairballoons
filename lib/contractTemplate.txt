@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: {{contract.license}}
 pragma solidity >=0.6.2;
 pragma experimental ABIEncoderV2;
+
 contract {{contract.name}} {
 	{{contract.idDataType}} public dataId;
 	uint public numberOfRecords = 0;
@@ -25,7 +26,7 @@ contract {{contract.name}} {
 	}
 
 	function addRecord(string memory payload, {{contract.idDataType}} ID) public returns (bool success) {
-	if(isRecord(ID)) revert('record with this id already exists');
+		if(isRecord(ID)) revert('record with this id already exists');
 		facts[ID].payload = payload;
 		recordsList.push(ID);
 		facts[ID].listPointer = recordsList.length - 1;
@@ -34,7 +35,7 @@ contract {{contract.name}} {
 	}
 
 	function getRecord({{contract.idDataType}} id) public view returns (string memory payload){
-	if(!isRecord(id)) revert('record with this id does not exist');
+		if(!isRecord(id)) revert('record with this id does not exist');
 		return (facts[id].payload);
 	}
 
@@ -53,14 +54,14 @@ contract {{contract.name}} {
 		return (payloadss);
 	}
 
-function deleteRecord({{contract.idDataType}} id) public returns (bool success) {
-    if(!isRecord(id)) revert('record with this id does not exist');
-    uint rowToDelete = facts[id].listPointer;
-    {{contract.idDataType}} keyToMove = recordsList[recordsList.length-1];
-    recordsList[rowToDelete] = keyToMove;
-    facts[keyToMove].listPointer = rowToDelete;
-    recordsList.pop();
-    numberOfRecords--;
-    return (true);
-  }
+	function deleteRecord({{contract.idDataType}} id) public returns (bool success) {
+		if(!isRecord(id)) revert('record with this id does not exist');
+		uint rowToDelete = facts[id].listPointer;
+		{{contract.idDataType}} keyToMove = recordsList[recordsList.length-1];
+		recordsList[rowToDelete] = keyToMove;
+		facts[keyToMove].listPointer = rowToDelete;
+		recordsList.pop();
+		numberOfRecords--;
+		return (true);
+	}
 }
