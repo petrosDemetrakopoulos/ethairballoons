@@ -1,4 +1,3 @@
-/* eslint node/handle-callback-err: "off" */
 /* eslint handle-callback-err: "off" */
 /* eslint array-callback-return: "off" */
 const expect = require('chai').expect
@@ -202,7 +201,7 @@ describe('testing deploy() function when account is not set', function () {
     done()
   })
   it('should return false', function (done) {
-    carSchemaNoAccount.deploy(function (err, success) {
+    carSchemaNoAccount.deploy(function (_err, success) {
       expect(success).to.equal(false)
       done()
     })
@@ -257,7 +256,7 @@ describe('testing deleteById() function when not deployed', function () {
 
 describe('testing deploy() function', function () {
   it('should return true', function (done) {
-    CarSchema.deploy(function (err, success) {
+    CarSchema.deploy(function (_err, success) {
       expect(success).to.equal(true)
       done()
     })
@@ -277,7 +276,7 @@ describe('testing save() function with data not matching the schema', function (
 describe('testing save() function when deployed', function () {
   it('should return {engine: "V8", wheels: 4}', function (done) {
     const newCarObject = { engine: 'V8', wheels: 4 }
-    CarSchema.save(newCarObject, function (err, res) {
+    CarSchema.save(newCarObject, function (_err, res) {
       expect(res).to.deep.equal({ engine: 'V8', wheels: 4 })
       done()
     })
@@ -286,7 +285,7 @@ describe('testing save() function when deployed', function () {
 
 describe('testing find() function', function () {
   it('should contain {engine: "V8", wheels: 4}', function (done) {
-    CarSchema.find(function (err, res) {
+    CarSchema.find(function (_err, res) {
       expect(res).deep.include(({ engine: 'V8', wheels: 4 }))
       done()
     })
@@ -295,7 +294,7 @@ describe('testing find() function', function () {
 
 describe('testing findById() function', function () {
   it('should return {engine: "V8", wheels: 4}', function (done) {
-    CarSchema.findById('V8', function (err, res) {
+    CarSchema.findById('V8', function (_err, res) {
       expect(res).deep.equal({ engine: 'V8', wheels: 4 })
       done()
     })
@@ -314,7 +313,7 @@ describe('testing updateById() function with data not matching the schema', func
 
 describe('testing updateById() function', function () {
   it('should return {engine: "V8", wheels: 8}', function (done) {
-    CarSchema.updateById('V8', { engine: 'V8', wheels: 8 }, function (err, res) {
+    CarSchema.updateById('V8', { engine: 'V8', wheels: 8 }, function (_err, res) {
       expect(res).deep.equal({ engine: 'V8', wheels: 8 })
       done()
     })
@@ -323,7 +322,7 @@ describe('testing updateById() function', function () {
 
 describe('testing deleteById() function', function () {
   it('should return true', function (done) {
-    CarSchema.deleteById('V8', function (err, res) {
+    CarSchema.deleteById('V8', function (_err, res) {
       expect(res).to.equal(true)
       done()
     })
