@@ -1,6 +1,6 @@
 {
   "name": "ethairballoons",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "A strictly typed ORM library for Ethereum blockchain",
   "main": "lib/index.js",
   "scripts": {
@@ -54,7 +54,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
-    "ganache": "^7.3.0",
+    "ganache": "^7.3.1",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0"
   }
