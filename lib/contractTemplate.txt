@@ -18,7 +18,7 @@ contract {{contract.name}} {
 
 	mapping({{contract.idDataType}} => {{contract.structName}}) public facts;
 
-	function isRecord({{contract.idDataType}} recordAddress) public view returns (bool isRec) {
+	function isRecord({{contract.idDataType}} recordAddress) internal view returns (bool isRec) {
 		if(recordsList.length == 0) return false;
 		return (recordsList[facts[recordAddress].listPointer] == recordAddress);
 	}

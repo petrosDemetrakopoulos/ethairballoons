@@ -18,7 +18,7 @@ contract carsContractNoAcc {
 
 	mapping(bytes32 => CarNoAcc) public facts;
 
-	function isRecord(bytes32 recordAddress) public view returns (bool isRec) {
+	function isRecord(bytes32 recordAddress) internal view returns (bool isRec) {
 		if(recordsList.length == 0) return false;
 		return (recordsList[facts[recordAddress].listPointer] == recordAddress);
 	}
