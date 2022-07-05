@@ -23,11 +23,11 @@ contract carsContract {
 		return (recordsList[facts[recordAddress].listPointer] == recordAddress);
 	}
 
-	function getRecordCount() public view returns (uint recCount){
+	function getRecordCount() external view returns (uint recCount){
 		return recordsList.length;
 	}
 
-	function addRecord(string memory payload, bytes32 ID) public returns (bool success) {
+	function addRecord(string memory payload, bytes32 ID) external returns (bool success) {
 		if(isRecord(ID)) revert('record with this id already exists');
 		facts[ID].payload = payload;
 		recordsList.push(ID);
@@ -36,18 +36,18 @@ contract carsContract {
 		return (true);
 	}
 
-	function getRecord(bytes32 id) public view returns (string memory payload){
+	function getRecord(bytes32 id) external view returns (string memory payload){
 		if(!isRecord(id)) revert('record with this id does not exist');
 		return (facts[id].payload);
 	}
 
-	function updateRecord(bytes32 id, string memory payload) public returns (bool success){
+	function updateRecord(bytes32 id, string memory payload) external returns (bool success){
 		if(!isRecord(id)) revert('record with this id does not exist');
 		facts[id].payload = payload;
 		return (true);
 	}
 
-	function getAllRecords() public view returns (string[] memory payloads) {
+	function getAllRecords() external view returns (string[] memory payloads) {
 		string[] memory payloadss = new string[](numberOfRecords);
 		for (uint i = 0; i < numberOfRecords; i++) {
 			Car storage fact = facts[recordsList[i]];
@@ -56,7 +56,7 @@ contract carsContract {
 		return (payloadss);
 	}
 
-	function deleteRecord(bytes32 id) public returns (bool success) {
+	function deleteRecord(bytes32 id) external returns (bool success) {
 		if(!isRecord(id)) revert('record with this id does not exist');
 		uint rowToDelete = facts[id].listPointer;
 		bytes32 keyToMove = recordsList[recordsList.length-1];
