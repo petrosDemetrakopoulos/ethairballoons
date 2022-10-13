@@ -49,12 +49,12 @@
   },
   "devDependencies": {
     "chai": "^4.3.6",
-    "eslint": "^8.23.1",
+    "eslint": "^8.25.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.1",
-    "ganache": "^7.4.3",
+    "eslint-plugin-promise": "^6.1.0",
+    "ganache": "^7.4.4",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0"
   }
