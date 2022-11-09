@@ -48,14 +48,14 @@
     "web3": "^1.8.0"
   },
   "devDependencies": {
-    "chai": "^4.3.6",
-    "eslint": "^8.25.0",
+    "chai": "^4.3.7",
+    "eslint": "^8.27.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.0",
-    "ganache": "^7.4.4",
-    "mocha": "^10.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "ganache": "^7.5.0",
+    "mocha": "^10.1.0",
     "nyc": "^15.1.0"
   }
 }
