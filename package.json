@@ -45,17 +45,17 @@
   "dependencies": {
     "handlebars": "^4.7.7",
     "solc": "^0.8.17",
-    "web3": "^1.8.0"
+    "web3": "^1.8.1"
   },
   "devDependencies": {
     "chai": "^4.3.7",
-    "eslint": "^8.27.0",
+    "eslint": "^8.30.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "ganache": "^7.5.0",
-    "mocha": "^10.1.0",
+    "ganache": "^7.7.2",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0"
   }
 }
