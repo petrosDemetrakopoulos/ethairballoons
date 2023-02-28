@@ -44,12 +44,12 @@
   },
   "dependencies": {
     "handlebars": "^4.7.7",
-    "solc": "^0.8.18",
+    "solc": "^0.8.19",
     "web3": "^1.8.2"
   },
   "devDependencies": {
     "chai": "^4.3.7",
-    "eslint": "^8.34.0",
+    "eslint": "^8.35.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
